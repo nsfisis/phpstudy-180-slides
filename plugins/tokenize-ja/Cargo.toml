@@ -1,0 +1,27 @@
+[package]
+name = "typst-plugin-tokenize-ja"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+anyhow = "1.0.100"
+ciborium = "0.2.2"
+serde = "1.0.228"
+
+[dependencies.lindera]
+version = "1.2.0"
+features = ["embedded-ipadic"]
+
+[dependencies.wasm-minimal-protocol]
+git = "https://github.com/astrale-sharp/wasm-minimal-protocol"
+rev = "e622e0e4a4f0f34be871a3a6bd22f6519415364b"
+
+[profile.release]
+lto = true
+strip = true
+opt-level = "z"
+codegen-units = 1
+panic = "abort"

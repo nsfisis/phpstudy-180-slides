@@ -3,7 +3,7 @@
 #let slide(..args) = touying-slide-wrapper(self => {
   let header(self) = {
     set align(top)
-    set text(size: 0.3em)
+    set text(size: 14pt)
     place(
       left + top,
       dx: 0.7em,
@@ -19,7 +19,7 @@
   }
   let footer(self) = {
     set align(bottom)
-    set text(fill: self.colors.neutral-darkest, size: 0.3em)
+    set text(fill: self.colors.neutral-darkest, size: 14pt)
     pad(x: 0.7em, y: 0.7em, {
       h(1fr)
       context utils.slide-counter.display() + " / " + utils.last-slide-number
@@ -71,6 +71,19 @@
           block(utils.display-info-date(self))
         }
       },
+    )
+    set text(size: 14pt)
+    place(
+      left + top,
+      dx: 0.7em,
+      dy: 0.7em,
+      image("./assets/deco.svg", width: 2em, height: 2em),
+    )
+    place(
+      left + top,
+      dx: 3em,
+      dy: 0.7em,
+      image("./assets/deco.svg", width: 1em, height: 1em),
     )
   }
   self = utils.merge-dicts(
