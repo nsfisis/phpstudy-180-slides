@@ -1,6 +1,9 @@
 #import "@preview/touying:0.6.1": *
+#import "@preview/codly:1.3.0": *
 #import "@preview/cjk-unbreak:0.2.0": remove-cjk-break-space, transform-childs
 #import "setoka.typ": *
+
+#show: codly-init.with()
 
 #show: remove-cjk-break-space
 
@@ -11,29 +14,32 @@
   cbor(plugin_tokenize_ja.tokenize(bytes(s)))
 }
 
+#let get-inner-str(e) = {
+  if e.func() == text {
+    if e.has("text") {
+      e.text
+    } else if e.has("body") {
+      e.body
+    } else {
+      none
+    }
+  } else {
+    none
+  }
+}
+
 #let make-助詞-small(rest) = {
   rest = transform-childs(rest, make-助詞-small)
   if utils.is-sequence(rest) {
     for child in rest.children {
-      if child.func() == text {
-        if child.has("text") {
-          for t in tokenize(child.text) {
-            if t.at(1) == "助詞" {
-              [#set text(size: 0.9em);#t.at(0)]
-            } else {
-              t.at(0)
-            }
+      let s = get-inner-str(child)
+      if s != none {
+        for t in tokenize(s) {
+          if t.at(1) == "助詞" {
+            [#set text(size: 0.9em);#t.at(0)]
+          } else {
+            t.at(0)
           }
-        } else if child.has("body") {
-          for t in tokenize(child.body) {
-            if t.at(1) == "助詞" {
-              [#set text(size: 0.9em);#t.at(0)]
-            } else {
-              t.at(0)
-            }
-          }
-        } else {
-          child
         }
       } else {
         child
@@ -57,6 +63,14 @@
     author: [nsfisis (いまむら)],
     date: datetime(year: 2025, month: 10, day: 29),
   ),
+  config-common(preamble: {
+    codly(
+      fill: rgb("#eee"),
+      lang-format: none,
+      number-format: none,
+      zebra-fill: none,
+    )
+  })
 )
 
 #set text(font: "Noto Sans CJK JP", lang: "ja")
@@ -268,9 +282,11 @@ nextUp も nextDown も \
 #[
   #set text(size: 0.7em)
 
+  #codly-range(2)
+  #codly(offset: -1)
   ```php
+  <?php
   use Nsfisis\NextAfter\NextAfter;
-
   function toExactFloatRange(
     float $from,
   ): array {
