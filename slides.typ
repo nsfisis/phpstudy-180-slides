@@ -141,9 +141,19 @@ $(1+p)/2$ が入る
 
 ---
 
+[1, p) \
+間に 1 しか入らない範囲？
+
+都合の良い p は存在しない
+
+---
+
+[1, 1より少しだけ大きい値) \
+間に 1 しか入らない範囲
+
 実数では無理
 
-#pause
+---
 
 コンピュータ上の実数なら？
 
@@ -194,6 +204,18 @@ p = 1.0000000000000002
   #set text(size: 0.7em)
   64 bit の二進浮動小数点数の場合
 ]
+
+---
+
+p = 1.0000000000000002
+
+1 < x < p となるような \
+x は存在しない (表せない)
+
+---
+
+1 と p のバイナリ表現を \
+見てみる
 
 ---
 
@@ -268,14 +290,17 @@ y = nextUp(x)
 
 ---
 
-PHP には \
+PHP には？
+
+#pause
+
 nextUp も nextDown も \
 無い！
 
 ---
 
 無いので作りました \
-#link("https://packagist.org/packages/nsfisis/next-after")[nsfisis/php-next-after]
+#link("https://packagist.org/packages/nsfisis/next-after")[nsfisis/next-after]
 
 ---
 

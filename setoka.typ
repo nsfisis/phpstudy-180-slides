@@ -111,6 +111,7 @@
   body,
 ) = {
   set text(size: 48pt)
+  show link: underline
 
   show: touying-slides.with(
     config-page(

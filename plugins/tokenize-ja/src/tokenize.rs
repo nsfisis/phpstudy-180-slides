@@ -10,7 +10,7 @@ static TOKENIZER: OnceLock<Tokenizer> = OnceLock::new();
 
 pub fn init() -> Result<(), anyhow::Error> {
     let dictionary = load_dictionary("embedded://ipadic").context("failed to load dictionary")?;
-    let segmenter = Segmenter::new(Mode::Normal, dictionary, None);
+    let segmenter = Segmenter::new(Mode::Normal, dictionary, None).keep_whitespace(true);
     let tokenizer = Tokenizer::new(segmenter);
     TOKENIZER
         .set(tokenizer)
